@@ -1,0 +1,26 @@
+{
+  "__type__": "cc.Material",
+  "_name": "Rich_Label",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "ce475997-1654-41fa-a885-697eb48ebff5"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "defines": {
+        "USE_TEXTURE": true
+      },
+      "props": {
+        "uvs": {
+          "__type__": "cc.Vec4",
+          "x": 0.4,
+          "y": 0.67,
+          "z": 0,
+          "w": 0
+        }
+      }
+    }
+  }
+}
