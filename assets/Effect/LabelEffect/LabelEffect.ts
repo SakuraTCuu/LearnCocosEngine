@@ -9,6 +9,8 @@ export default class NewClass extends cc.Component {
     mMaterial: cc.MaterialVariant = null;
 
     onLoad() {
+        // cc.log(this._super);
+        // cc._testLabel = this.TestLabel;
         this.mMaterial = this.TestLabel.getMaterial(0);
     }
 
