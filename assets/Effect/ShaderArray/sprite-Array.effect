@@ -1,0 +1,149 @@
+// Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.  
+/**
+
+镂空
+可以扩展,实现mask遮罩与反向遮罩
+可以传入texture,实现敲敲乐裂纹特效
+**/
+
+
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: vs
+      frag: fs
+      blendState:
+        targets:
+        - blend: true
+      rasterizerState:
+        cullMode: none
+      properties:
+        texture: { value: white }
+        alphaThreshold: { value: 0.5 }
+        posArr: { value: [0,0,0,0] } #pos
+        size: {value: [0.1, 0.1]} #显示宽高
+        count: {value: 0} #数组长度
+        newTex: { value: white } #采样的图片
+}%
+
+
+CCProgram vs %{
+  precision highp float;
+
+  #include <cc-global>
+  #include <cc-local>
+
+  in vec3 a_position;
+  in vec4 a_color;
+  out vec4 v_color;
+
+  #if USE_TEXTURE
+  in vec2 a_uv0;
+  out vec2 v_uv0;
+  #endif
+
+  void main () {
+    vec4 pos = vec4(a_position, 1);
+
+    #if CC_USE_MODEL
+    pos = cc_matViewProj * cc_matWorld * pos;
+    #else
+    pos = cc_matViewProj * pos;
+    #endif
+
+    #if USE_TEXTURE
+    v_uv0 = a_uv0;
+    #endif
+
+    v_color = a_color;
+
+    gl_Position = pos;
+  }
+}%
+
+
+CCProgram fs %{
+  precision highp float;
+  
+  #include <alpha-test>
+  #include <texture>
+
+  in vec4 v_color;
+
+  #if USE_TEXTURE
+  in vec2 v_uv0;
+  uniform sampler2D texture;
+  uniform sampler2D newTex;
+  uniform properties {
+    vec4 posArr[1000]; //常数
+    vec2 size;
+    int count;
+  };
+  #endif
+
+  vec4 getContainsTexCol(vec4 o){
+    float w = size.x;
+    float h = size.y; 
+    // 不能直接与count比较,因为会报错:  Loop index cannot be compared with non-constant expression
+    /*
+       发生这种情况是因为在某些硬件上，glsl循环没有被内置入到本机GPU机器指令中，这意味着for循环的执行次数需要有一个硬上限，
+       该上限控制将生成多少循环内部代码的副本。如果用const float或甚至是define指令替换uniform，
+       那么着色器编译器可以确定编译时的循环次数（代码拷贝次数），并相应地生成代码。但如果是通过uniform常量来传递的，
+       那么这个上限在编译时就不知道了。
+       所以解决问题的办法是把传递进来的count常量换成一个RANGE常数（const float RANGE = 10.0 )
+       参考: https://www.techbrood.com/zh/news/webgl/webgl-glsl%E7%A8%8B%E5%BA%8F%E5%87%BA%E9%94%99_-loop-index-cannot-be-compared-with-non-constant-expression.html
+     */
+    for (int i = 0; i < 1000; i++)
+    {
+      if (i >= count){ break; } /* 超过长度直接break */
+
+      if (   posArr[i].x   <  v_uv0.x && 
+         (posArr[i].x + w) >  v_uv0.x &&
+          posArr[i].y      <  v_uv0.y && 
+         (posArr[i].y + h) >  v_uv0.y)
+      {
+          //texture uv 转换到newTex 的uv值
+          float newU = (v_uv0.x - posArr[i].x) / w;
+          float newV = (v_uv0.y - posArr[i].y) / h;
+          CCTexture(newTex, vec2(newU, newV), o);
+          return o;
+      }
+    }
+    CCTexture(texture, v_uv0, o);
+    return o;
+  }
+
+  vec4 getContainsCol(vec4 o){
+    float w = size.x;
+    float h = size.y; 
+    for (int i = 0; i < 1000; i++)
+    {
+      if (i >= count){ break; } /* 超过长度直接break */
+
+      if (   posArr[i].x   <  v_uv0.x && 
+         (posArr[i].x + w) >  v_uv0.x &&
+          posArr[i].y      <  v_uv0.y && 
+         (posArr[i].y + h) >  v_uv0.y)
+      {
+        return vec4(1, 1, 1, 0);
+      }
+    }
+    CCTexture(texture, v_uv0, o);
+    return o;
+  }
+
+  void main () {
+    vec4 o = vec4(1, 1, 1, 1);
+    o *= v_color;
+
+    #if SHOW_HOLLOW
+        #if SHOW_TEXTURE //展示贴图在镂空部位 
+            o = getContainsTexCol(o); //贴图颜色填充镂空部位
+        #else
+            o = getContainsCol(o);//镂空部位透明
+        #endif
+    #endif
+
+    gl_FragColor = o;
+  }
+}%

@@ -1,0 +1,37 @@
+{
+  "__type__": "cc.Material",
+  "_name": "sprite-Array",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "7dc779a0-ac26-4e42-83be-c2c70fb55c39"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "defines": {
+        "USE_TEXTURE": true,
+        "SHOW_HOLLOW": true,
+        "SHOW_TEXTURE": false
+      },
+      "props": {
+        "count": 1,
+        "posArr": {
+          "__type__": "cc.Vec4",
+          "x": 0.5,
+          "y": 0.5,
+          "z": 0,
+          "w": 0
+        },
+        "size": {
+          "__type__": "cc.Vec2",
+          "x": 0.1,
+          "y": 0.3
+        },
+        "newTex": {
+          "__uuid__": "6e056173-d285-473c-b206-40a7fff5386e"
+        }
+      }
+    }
+  }
+}
