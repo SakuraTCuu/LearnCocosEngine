@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.Material",
+  "_name": "sprite-gradual",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "b337ef01-5f0b-46e4-9d5a-04b71c4a8d6f"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "defines": {
+        "USE_TEXTURE": true
+      },
+      "props": {
+        "endX": 0.5,
+        "startX": 0
+      }
+    }
+  }
+}
