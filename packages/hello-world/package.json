@@ -1,0 +1,15 @@
+{
+    "name": "auto-create",
+    "version": "0.0.1",
+    "description": "自动生成资源文件扩展包",
+    "author": "SakuraTCuu",
+    "main": "main.js",
+    "main-menu": {
+        "Packages/Create": {
+            "message": "auto-create:createFile"
+        },
+        "Packages/Delete": {
+            "message": "auto-create:deleteFile"
+        }
+    }
+}
