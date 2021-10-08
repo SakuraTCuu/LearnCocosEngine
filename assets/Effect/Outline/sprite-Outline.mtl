@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.Material",
+  "_name": "sprite-Outline",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "a3f03701-475b-4337-aa9f-23852bf4eaca"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "defines": {
+        "USE_TEXTURE": true,
+        "SHOW_OUTLINE": true,
+        "SHOW_INLIGHT": false
+      },
+      "props": {
+        "outLineColor": {
+          "__type__": "cc.Vec4",
+          "x": 1,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    }
+  }
+}
