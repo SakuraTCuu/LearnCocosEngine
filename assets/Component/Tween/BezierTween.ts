@@ -17,6 +17,9 @@ export default class TweenTest extends cc.Component {
     @property(cc.Node)
     ContentNode: cc.Node = null;
 
+    @property(cc.Graphics)
+    Graphics: cc.Graphics = null;
+
     private itemArr: Array<cc.Node> = [];
 
     private debug: boolean = true;
@@ -28,7 +31,9 @@ export default class TweenTest extends cc.Component {
     p3: cc.Vec3 = null;
 
     start() {
-        
+
+        this.initEvent();
+
         //TODO:  动态添加元素
         /**
          * 1. 选择文件
@@ -88,18 +93,47 @@ export default class TweenTest extends cc.Component {
         // document.documentElement.innerHTML += `<input type="file" name="file" id="doc" style="width:150px;" onchange="javascript:onSelectImage();">`
     }
 
+    initEvent() {
+        return ;
+        this.node.on(cc.Node.EventType.TOUCH_START, (e) => {
+            let pos = this.node.convertToNodeSpaceAR(e.getLocation());
+            this.Graphics.moveTo(pos.x, pos.y)
+        }, this)
+
+        // this.node.on(cc.Node.EventType.TOUCH_MOVE, () => {
+
+        // }, this)
+
+        this.node.on(cc.Node.EventType.TOUCH_END, (e) => {
+            let pos = this.node.convertToNodeSpaceAR(e.getLocation());
+            this.Graphics.lineTo(pos.x, pos.y)
+            this.Graphics.stroke();
+        }, this)
+    }
+
     onClickExport() {
 
         this.mResult = [];
-        /**
-         * 获取所有的位置信息
-         */
-        for (let i = 0; i < this.itemArr.length; i++) {
-            let itemCtrl = this.itemArr[i].getComponent(BezierItem);
+
+        let exportLast = true;
+        if (!exportLast) {
+            /**
+                    * 获取所有的位置信息
+                    */
+            for (let i = 0; i < this.itemArr.length; i++) {
+                let itemCtrl = this.itemArr[i].getComponent(BezierItem);
+                let posList = itemCtrl.exportData();
+                this.mResult.push(posList);
+            }
+            console.log(JSON.stringify(this.mResult));
+        } else {
+            if (this.itemArr.length === 0) {
+                return
+            }
+            let itemCtrl = this.itemArr[this.itemArr.length - 1].getComponent(BezierItem);
             let posList = itemCtrl.exportData();
-            this.mResult.push(posList);
+            console.log(JSON.stringify(posList));
         }
-        console.log(JSON.stringify(this.mResult));
     }
 
     onClickRun() {

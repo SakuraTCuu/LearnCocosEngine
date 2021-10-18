@@ -125,10 +125,10 @@ export default class BezierItem extends cc.Component {
         let c2Pos = this.node.position.add(this.Ctrl2Node.position);
         let endPos = this.node.position.add(this.EndNode.position);
         return [
-        //    startPos,
-           c1Pos,
-           c2Pos,
-           endPos,
+            startPos,
+            c1Pos,
+            c2Pos,
+            endPos,
         ];
     }
 }
