@@ -92,8 +92,8 @@ CCEffect %{
       // o *= v_color;
 
       #if SHOW_OUTLINE
-        float fw = 0.01;
-          // 先四周多次采样
+        float fw = 0.03;
+        // 先四周多次采样
         float sLeft = texture2D(texture, v_uv0 + vec2(fw,0)).a;
         float sRight = texture2D(texture, v_uv0 - vec2(fw,0)).a;
         float sBottom = texture2D(texture, v_uv0 - vec2(0,fw)).a;

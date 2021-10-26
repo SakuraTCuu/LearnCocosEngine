@@ -58,7 +58,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "autoReleaseAssets": false,
-    "_id": "ca39499e-72fe-4cc1-a470-dfcd65092578"
+    "_id": "56134f38-b199-495b-b93d-4755cf215278"
   },
   {
     "__type__": "cc.Node",
@@ -76,18 +76,18 @@
       },
       {
         "__id__": 7
+      },
+      {
+        "__id__": 9
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 9
-      },
-      {
-        "__id__": 10
-      },
-      {
         "__id__": 11
+      },
+      {
+        "__id__": 12
       }
     ],
     "_prefab": null,
@@ -177,7 +177,7 @@
       "array": [
         0,
         0,
-        528.519065953322,
+        525.9209897419687,
         0,
         0,
         0,
@@ -332,7 +332,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "TestNode",
+    "_name": "Test5",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -355,8 +355,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 195,
-      "height": 270
+      "width": 197,
+      "height": 166
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -390,7 +390,7 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
-    "_id": "b7yEyQAc5Is5XlUYPHMEwf"
+    "_id": "7dqJOLNRBDibgFF0W0pRp3"
   },
   {
     "__type__": "cc.Sprite",
@@ -402,13 +402,13 @@
     "_enabled": true,
     "_materials": [
       {
-        "__uuid__": "42015722-e5fe-4920-a6c0-bbaa97120e58"
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "31bc895a-c003-4566-a9f3-2e54ae1c17dc"
+      "__uuid__": "2c079af6-0550-4456-95f9-5935f04c0165"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -422,7 +422,101 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": null,
-    "_id": "bejiY5NNNCHp4WaFT1xIOe"
+    "_id": "c9MX7n/+RGHZzGQBWr/Fc6"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Test5",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 10
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 197,
+      "height": 166
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "6aoz4FNOVIEoWUi1c+xVzd"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 9
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "42015722-e5fe-4920-a6c0-bbaa97120e58"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "2c079af6-0550-4456-95f9-5935f04c0165"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": null,
+    "_id": "4a7mpBiI5HqoBJoGdGrRE+"
   },
   {
     "__type__": "cc.Canvas",
@@ -467,18 +561,5 @@
     "_originalWidth": 0,
     "_originalHeight": 0,
     "_id": "29zXboiXFBKoIV4PQ2liTe"
-  },
-  {
-    "__type__": "ec205umLC5KTrIjj0S4TXgg",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
-    },
-    "_enabled": true,
-    "TestNode": {
-      "__id__": 7
-    },
-    "_id": "5bA7Fqa4FIKL64BwK3s9jw"
   }
 ]

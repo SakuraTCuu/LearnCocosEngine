@@ -12,14 +12,15 @@
       "defines": {
         "USE_TEXTURE": true,
         "SHOW_OUTLINE": true,
-        "SHOW_INLIGHT": false
+        "SHOW_INLIGHT": false,
+        "USE_ALPHA_TEST": false
       },
       "props": {
         "outLineColor": {
           "__type__": "cc.Vec4",
           "x": 1,
-          "y": 0,
-          "z": 0,
+          "y": 1,
+          "z": 1,
           "w": 1
         }
       }
