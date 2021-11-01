@@ -1,0 +1,25 @@
+{
+  "__type__": "cc.Material",
+  "_name": "sprite-OriEffect",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "d8856b69-5994-4558-90d5-8f265723c159"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "defines": {
+        "USE_TEXTURE": true
+      },
+      "props": {
+        "texture": {
+          "__uuid__": "9cc63d14-4c82-4794-97ad-218271373fdb"
+        },
+        "u_normalMap": {
+          "__uuid__": "51bbfeda-d1a4-48a6-8304-2ce0e9320af9"
+        }
+      }
+    }
+  }
+}
