@@ -10,21 +10,32 @@ export default class Ray extends cc.Component {
     TestNode: cc.Node = null;
 
 
-    lineArr = [{
-        p1: { x: -400, y: -200 },
-        p2: { x: -400, y: 200 },
-    }, {
-        p1: { x: -400, y: 200 },
-        p2: { x: 400, y: 200 },
-    },
-    {
-        p1: { x: 400, y: 200 },
-        p2: { x: 400, y: -200 },
-    },
-    {
-        p1: { x: 400, y: -200 },
-        p2: { x: -400, y: -200 },
-    }];
+    lineArr = [
+        // {
+        //     p1: { x: -200, y: 0 },
+        //     p2: { x: -100, y: 100 },
+        // }
+        // {
+        //     p1: { x: -200, y: 200 },
+        //     p2: { x: 300, y: 100 },
+        // },
+        {
+            p1: { x: -400, y: 200 },
+            p2: { x: 400, y: 200 },
+        },
+        // {
+        //     p1: { x: -400, y: 200 },
+        //     p2: { x: -400, y: -200 },
+        // },
+        // {
+        //     p1: { x: 400, y: 200 },
+        //     p2: { x: 400, y: -200 },
+        // },
+        {
+            p1: { x: 400, y: -200 },
+            p2: { x: -400, y: -200 },
+        }
+    ];
 
     /**
      * 射线检测 ? 
@@ -36,7 +47,7 @@ export default class Ray extends cc.Component {
         this.node.on(cc.Node.EventType.TOUCH_END, this.touchEnd, this);
         this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.touchEnd, this);
 
-        this.test();
+        // this.test();
         this.initWall();
     }
 
@@ -66,6 +77,30 @@ export default class Ray extends cc.Component {
     }
 
     test() {
+
+        let p1 = cc.v2(0, 0);
+        let p2 = cc.v2(100, 200);
+
+        this.showGraphicsLine(p1, p2);
+        //生成反射线段
+        let normal = p2.sub(p1);
+        //normal 向量, 求法向量 
+        //先求角度
+        let angle = Math.atan2(normal.y, normal.x);
+        console.log("angle: ", angle);
+        //已知角度, 求法向量
+        let oriNormal = cc.v2(0, 1); //以x轴为向量, 则y轴作为法向量
+        normal = oriNormal.rotate(angle);
+
+        // normal.addSelf(p1); //坐标系转换
+        let mid = p1.add(p2.sub(p1).div(2));
+
+        this.showGraphicsLine(mid, mid.add(normal.mul(100)), cc.Color.GREEN);
+
+        console.log(normal.x, normal.y)
+
+        return;
+
         let pos = cc.v2(400, 33.378932968536255);
 
         //原始位置
@@ -102,9 +137,9 @@ export default class Ray extends cc.Component {
             let line = this.lineArr[i];
             //遍历所有的线段,判断是否相交
             let result = this.segmentsIntr(s1, s2, line.p1, line.p2);
-
             if (result) { //相交一个就可以打断
-                if (result.x === s1.x && result.y === s1.y) { //发射点不算在内
+                result = cc.v2(result);
+                if (result.fuzzyEquals(s1, 2)) { //发射点不算在内
                     continue;
                 }
                 targetPos = cc.v2(result);
@@ -115,6 +150,7 @@ export default class Ray extends cc.Component {
         }
 
         if (!targetPos) {
+            this.showGraphicsLine(s1, s2, cc.Color.RED);
             console.error("未碰撞");
             return;
         }
@@ -125,20 +161,34 @@ export default class Ray extends cc.Component {
 
         //生成反射线段
         let normal = p2.sub(p1);
-        //计算法向量
-        if (normal.x === 0) {
-            if (normal.y > 0) {
-                normal = cc.v2(1, 0);
-            } else {
-                normal = cc.v2(-1, 0);
-            }
-        } else {
-            if (normal.x > 0) {
-                normal = cc.v2(0, -1);
-            } else {
-                normal = cc.v2(0, 1);
-            }
-        }
+        //normal 向量, 求法向量 
+        //先求角度
+        let angle = Math.atan2(normal.y, normal.x);
+        console.log("angle: ", angle * 180 / 3.14);
+        //已知角度, 求法向量
+        let oriNormal = cc.v2(0, 1); //以x轴为向量, 则y轴作为法向量
+        // 现法向量 * cos夹角 = 原法向量   ps:投影向量
+        // 现法向量 = 原法向量 / cos;
+        // rotateSelf
+        //法向量 
+        normal = oriNormal.rotate(angle);
+        // normal.addSelf(p1);
+        // dot
+        // normal.normalizeSelf
+
+        // if (normal.x === 0) {
+        //     if (normal.y > 0) {
+        //         normal = cc.v2(1, 0);
+        //     } else {
+        //         normal = cc.v2(-1, 0);
+        //     }
+        // } else {
+        //     if (normal.x > 0) {
+        //         normal = cc.v2(0, -1);
+        //     } else {
+        //         normal = cc.v2(0, 1);
+        //     }
+        // }
 
         //绘制法向量
         // this.showGraphicsLine(targetPos, targetPos.add(normal.mul(100)), cc.Color.GREEN);
@@ -247,7 +297,6 @@ export default class Ray extends cc.Component {
      * 展示射线
      */
     showRayLine(e: cc.Event.EventTouch) {
-        console.clear();
         this.Graphics.clear();
 
         let pos = e.getLocation();
@@ -279,7 +328,7 @@ export default class Ray extends cc.Component {
      * @param d 
      * @returns 
      */
-    segmentsIntr(a, b, c, d) {
+    segmentsIntr(a, b, c, d): any {
         /** 1 解线性方程组, 求线段交点. **/
         // 如果分母为0 则平行或共线, 不相交  
         var denominator = (b.y - a.y) * (d.x - c.x) - (a.x - b.x) * (c.y - d.y);

@@ -1,0 +1,45 @@
+模仿物理射线
+
+1. 检测
+
+   检测 一条线段与其他线段的交点
+
+   缺陷: 暂时无法判断多条线段的前后关系, 可能会存在穿透现象,(两条线段都与射线相交, 怎么判断两条线段那个先相交呢?)
+
+2. 法线 
+    
+    计算法线我用了取巧的办法, 起初想用 向量的投影来计算, 没头绪.
+    后边通过以x轴作为一条直线,以(0,1)作为这条直线的法线,通过向量与x轴的夹角,继而计算出最终的法线.
+      
+         //
+        let normal = p2.sub(p1);
+        //求 与x轴的夹角
+        let angle = Math.atan2(normal.y, normal.x);
+
+        //以x轴为向量, 则y轴作为法向量
+        let oriNormal = cc.v2(0, 1); 
+        //旋转偏转的角度, 求得最终的法向量
+        normal = oriNormal.rotate(angle);
+        //转换一下坐标系, 上边的计算是以(0,0)为原点进行计算的, 转换到 p1 所在的坐标系
+        mid.add(normal.mul(100))
+
+2. 反射
+ 
+   参考: https://forum.cocos.org/t/topic/87163
+     //入射向量归一化
+     let curVec = s2.sub(s1).normalize();
+     //投影向量
+     let proj = curVec.dot(normal);
+     normal = normal.mul(2 * proj);
+     //反射向量
+     let resultVec = curVec.sub(normal);
+     //下一个的终点
+     const endPos = s1.add(resultVec);
+
+3. 总结:
+
+   向量计算还是有点生疏.
+   做100个轮子
+   做100个垃圾
+   然后
+   做游戏
