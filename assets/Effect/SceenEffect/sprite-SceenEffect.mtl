@@ -1,0 +1,26 @@
+{
+  "__type__": "cc.Material",
+  "_name": "sprite-SceenEffect",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "d6cfe284-809d-41d5-ab04-fabe30ee09fc"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "defines": {
+        "USE_TEXTURE": true
+      },
+      "props": {
+        "waveTexture": {
+          "__uuid__": "1e4b6a6c-36c4-48cf-8027-1537c93a4665"
+        },
+        "magnitude": 0.03,
+        "texture": {
+          "__uuid__": "ad08bb1a-0e4a-41a1-8860-e9a12aafed84"
+        }
+      }
+    }
+  }
+}

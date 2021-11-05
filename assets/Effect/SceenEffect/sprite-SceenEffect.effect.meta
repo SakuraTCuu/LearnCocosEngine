@@ -1,0 +1,17 @@
+{
+  "ver": "1.0.25",
+  "uuid": "d6cfe284-809d-41d5-ab04-fabe30ee09fc",
+  "compiledShaders": [
+    {
+      "glsl1": {
+        "vert": "\nprecision highp float;\nuniform mat4 cc_matViewProj;\nuniform mat4 cc_matWorld;\nattribute vec3 a_position;\nattribute vec4 a_color;\nvarying vec4 v_color;\n#if USE_TEXTURE\nattribute vec2 a_uv0;\nvarying vec2 v_uv0;\n#endif\nvoid main () {\n  vec4 pos = vec4(a_position, 1);\n  #if CC_USE_MODEL\n  pos = cc_matViewProj * cc_matWorld * pos;\n  #else\n  pos = cc_matViewProj * pos;\n  #endif\n  #if USE_TEXTURE\n  v_uv0 = a_uv0;\n  #endif\n  v_color = a_color;\n  gl_Position = pos;\n}",
+        "frag": "\nprecision highp float;\n#if USE_ALPHA_TEST\n#endif\nuniform vec4 cc_time;\nvarying vec4 v_color;\n#if USE_TEXTURE\nvarying vec2 v_uv0;\nuniform sampler2D texture;\nuniform sampler2D waveTexture;\nuniform float magnitude;\n#endif\nvoid main () {\n  vec2 distuv = vec2(v_uv0.x + cc_time.x * 2. / 20., v_uv0.y + cc_time.x * 2. / 20.);\n  distuv = fract(distuv);\n  vec2 disp = texture2D(waveTexture, distuv).xy;\n  disp = ((disp * 2.) - 1.) * magnitude;\n  vec2 final = v_uv0 + disp;\n  vec4 color = texture2D(texture, final);\n  color *= v_color;\n  gl_FragColor = color;\n}"
+      },
+      "glsl3": {
+        "vert": "\nprecision highp float;\nuniform CCGlobal {\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_time;\n  mediump vec4 cc_screenSize;\n  mediump vec4 cc_screenScale;\n};\nuniform CCLocal {\n  mat4 cc_matWorld;\n  mat4 cc_matWorldIT;\n};\nin vec3 a_position;\nin vec4 a_color;\nout vec4 v_color;\n#if USE_TEXTURE\nin vec2 a_uv0;\nout vec2 v_uv0;\n#endif\nvoid main () {\n  vec4 pos = vec4(a_position, 1);\n  #if CC_USE_MODEL\n  pos = cc_matViewProj * cc_matWorld * pos;\n  #else\n  pos = cc_matViewProj * pos;\n  #endif\n  #if USE_TEXTURE\n  v_uv0 = a_uv0;\n  #endif\n  v_color = a_color;\n  gl_Position = pos;\n}",
+        "frag": "\nprecision highp float;\n#if USE_ALPHA_TEST\n  uniform ALPHA_TEST {\n    float alphaThreshold;\n  };\n#endif\nuniform CCGlobal {\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n  vec4 cc_time;\n  mediump vec4 cc_screenSize;\n  mediump vec4 cc_screenScale;\n};\nin vec4 v_color;\n#if USE_TEXTURE\nin vec2 v_uv0;\nuniform sampler2D texture;\nuniform sampler2D waveTexture;\nuniform properties {\n  float magnitude;\n};\n#endif\nvoid main () {\n  vec2 distuv = vec2(v_uv0.x + cc_time.x * 2. / 20., v_uv0.y + cc_time.x * 2. / 20.);\n  distuv = fract(distuv);\n  vec2 disp = texture(waveTexture, distuv).xy;\n  disp = ((disp * 2.) - 1.) * magnitude;\n  vec2 final = v_uv0 + disp;\n  vec4 color = texture(texture, final);\n  color *= v_color;\n  gl_FragColor = color;\n}"
+      }
+    }
+  ],
+  "subMetas": {}
+}
