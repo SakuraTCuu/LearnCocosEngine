@@ -19,8 +19,8 @@
     "miniCamera",
     "ui"
   ],
-  "design-resolution-width": 960,
-  "design-resolution-height": 640,
+  "design-resolution-width": 1334,
+  "design-resolution-height": 750,
   "fit-width": false,
   "fit-height": true,
   "use-project-simulator-setting": false,
