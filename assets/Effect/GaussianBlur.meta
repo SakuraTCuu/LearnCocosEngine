@@ -1,9 +1,9 @@
 {
   "ver": "1.1.2",
-  "uuid": "5434429b-5589-463b-86bb-c5159d25d7e5",
-  "isBundle": true,
-  "bundleName": "resources",
-  "priority": 8,
+  "uuid": "1aade5cb-5505-48c5-b4cb-4f9d65ee6e85",
+  "isBundle": false,
+  "bundleName": "",
+  "priority": 1,
   "compressionType": {},
   "optimizeHotUpdate": {},
   "inlineSpriteFrames": {},

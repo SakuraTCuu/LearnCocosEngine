@@ -1,0 +1,18 @@
+{
+  "__type__": "cc.Material",
+  "_name": "sprite-GaussianBlur",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "cda5baf3-c154-488e-8409-c4b24c33f0ac"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "defines": {
+        "USE_TEXTURE": true,
+        "SHOW_EFFECT": true
+      }
+    }
+  }
+}
