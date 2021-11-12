@@ -15,14 +15,14 @@ export default class Ray extends cc.Component {
 
     mDotList: Array<cc.Node> = [];
 
-    mStepLen: number = 40;
+    mStepLen: number = 20;
 
     /**
      * 
      */
     onLoad() {
         //生成20个节点
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < 400; i++) {
             let node = cc.instantiate(this.TestNode);
             node.parent = this.node;
             this.mDotList[i] = node;
