@@ -1,5 +1,8 @@
 const { ccclass, property } = cc._decorator;
 
+/**
+ * 参考: https://forum.cocos.org/t/topic/124435
+ */
 @ccclass
 export default class FireWorksCtrl extends cc.Component {
 
@@ -27,13 +30,14 @@ export default class FireWorksCtrl extends cc.Component {
     private renderTextureArray: Array<cc.RenderTexture> = [];
     private spfList: Array<cc.SpriteFrame> = [];
 
-    onLoad() {
+    onEnable() {
+        console.log("onEnable");
         this.TouchNode.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
 
         let width = cc.winSize.width;
         let height = cc.winSize.height;
-        width = 750;
-        height = 1440;
+        // width = 750;
+        // height = 1440;
         let rtx1 = new cc.RenderTexture();
         let rtx2 = new cc.RenderTexture();
         rtx1.initWithSize(width, height);
@@ -62,7 +66,7 @@ export default class FireWorksCtrl extends cc.Component {
 
     count: number = 0;
     update() {
-
+        // return;
         this.count++;
 
         let i: number = this.mDots.length;
@@ -72,6 +76,15 @@ export default class FireWorksCtrl extends cc.Component {
                 this.mDots.splice(i, 1);
                 this.mFlowers.push(new Flower(dot.mDotList));
                 dot.clear();
+            }
+        }
+
+        i = this.mFlowers.length;
+        while (i--) {
+            const flower = this.mFlowers[i];
+            if (flower.step()) {
+                this.mFlowers.splice(i, 1);
+                flower.clear();
             }
         }
 
@@ -133,9 +146,44 @@ class Dot {
     }
 }
 
+//烟花爆开
 class Flower {
 
-    constructor(dotList: Array<cc.Node>) {
+    mDotList: Array<cc.Node> = null;
+    count: number = 0;
 
+    constructor(dotList: Array<cc.Node>) {
+        this.mDotList = dotList;
+        for (const dot of this.mDotList) {
+            const rad = Math.PI * 2 * Math.random();
+            dot['vx'] = Math.random() * 10 * Math.cos(rad);
+            dot['vy'] = 5 + Math.random() * 10 * Math.sin(rad);
+        }
+        this.count = 0;
     }
+
+    public step() {
+        for (const dot of this.mDotList) {
+            dot['vy'] += g;
+            dot['vx'] *= 1;
+            dot['vy'] *= 1;
+            dot.x += dot['vx'];
+            dot.y += dot['vy'];
+            if (dot["blink"]) {
+                dot.active = Math.random() < 0.5;
+            } else {
+                dot.opacity *= 0.99995;
+            }
+        }
+        return ++this.count >= 200;
+    }
+
+    public clear(): void {
+        for (const dot of this.mDotList) {
+            dot.destroy();
+        }
+        this.mDotList.length = 0;
+        this.mDotList = null;
+    }
+
 }
