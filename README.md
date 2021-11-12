@@ -20,6 +20,7 @@ cocos creator 引擎源码研习, shader特效学习, 工具Demo
 
 ### FireWorks
 烟花特效, 高斯模糊应用<br>
+![](https://github.com/SakuraTCuu/LearnCocosEngine/raw/master/README_GIF/FireWorks2.gif)
 ![](https://github.com/SakuraTCuu/LearnCocosEngine/raw/master/README_GIF/FireWorks.gif)  
 ### GaussianBlur
 高斯模糊<br>
