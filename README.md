@@ -16,10 +16,11 @@ cocos creator 引擎源码研习, shader特效学习, 工具Demo
 
 ### FireWorks
 烟花特效, 高斯模糊应用
+![](https://github.com/SakuraTCuu/LearnCocosEngine/raw/master/README_GIF/FireWorks.gif)  
 ### GaussianBlur
 高斯模糊
 ### GradualEffect
-渐变
+smoothstep 渐变
 ### OriEffect
 仿奥日和黑暗森林, 波纹特效
 ### Outline
