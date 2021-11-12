@@ -75,22 +75,22 @@
         "__id__": 5
       },
       {
-        "__id__": 7
+        "__id__": 8
       },
       {
-        "__id__": 9
+        "__id__": 10
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 12
-      },
-      {
         "__id__": 13
       },
       {
         "__id__": 14
+      },
+      {
+        "__id__": 15
       }
     ],
     "_prefab": null,
@@ -251,6 +251,9 @@
     "_components": [
       {
         "__id__": 6
+      },
+      {
+        "__id__": 7
       }
     ],
     "_prefab": null,
@@ -334,6 +337,33 @@
     "_id": "cf7NCv8YpLk7di7vHvUWt+"
   },
   {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 5
+    },
+    "_enabled": true,
+    "alignMode": 1,
+    "_target": null,
+    "_alignFlags": 45,
+    "_left": 0,
+    "_right": 0,
+    "_top": 0,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 1334,
+    "_originalHeight": 750,
+    "_id": "a4vuH79MtPH7HyQ0dGIDXR"
+  },
+  {
     "__type__": "cc.Node",
     "_name": "Player",
     "_objFlags": 0,
@@ -344,7 +374,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 8
+        "__id__": 9
       }
     ],
     "_prefab": null,
@@ -400,7 +430,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 7
+      "__id__": 8
     },
     "_enabled": true,
     "_materials": [
@@ -438,10 +468,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 10
+        "__id__": 11
       },
       {
-        "__id__": 11
+        "__id__": 12
       }
     ],
     "_prefab": null,
@@ -497,7 +527,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 9
+      "__id__": 10
     },
     "_enabled": true,
     "alignMode": 1,
@@ -524,7 +554,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 9
+      "__id__": 10
     },
     "_enabled": true,
     "_layoutSize": {
@@ -604,16 +634,16 @@
     },
     "_enabled": true,
     "TestSprite": {
-      "__id__": 8
+      "__id__": 9
     },
     "MountSprite": {
-      "__id__": 8
+      "__id__": 9
     },
     "ButtonPrefab": {
       "__uuid__": "4c747a59-4e16-481e-a771-5146b425b920"
     },
     "ContentNode": {
-      "__id__": 9
+      "__id__": 10
     },
     "_id": "295DQtw5RO7ZA8hZ5OVmdQ"
   }
