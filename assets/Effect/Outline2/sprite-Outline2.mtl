@@ -10,7 +10,16 @@
   "_techniqueData": {
     "0": {
       "defines": {
-        "USE_TEXTURE": true
+        "USE_TEXTURE": true,
+        "SHOW_OUTLINE": true
+      },
+      "props": {
+        "outlineSize": 3,
+        "textureSize": {
+          "__type__": "cc.Vec2",
+          "x": 197,
+          "y": 166
+        }
       }
     }
   }

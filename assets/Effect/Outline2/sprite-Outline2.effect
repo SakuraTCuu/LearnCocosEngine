@@ -34,10 +34,6 @@ CCEffect %{
                  tooltip: "描边宽度，以像素为单位"
                }
           }
-          isShow: {
-              value: 0.5,
-              tooltip: "是否显示轮廓"
-          }
 }%
 
 
@@ -98,8 +94,6 @@ CCProgram fs %{
       vec2 textureSize; // 纹理大小（宽和高）
 
       float outlineSize;// 描边宽度，以像素为单位
- 
-      int isShow; //是否显示轮廓
   };
 
   // const float cosArray[12] = { 1, 0.866, 0.5, 0, -0.5, -0.866, -1, -0.866, -0.5, 0, 0.5, 0.866 };
@@ -136,7 +130,7 @@ CCProgram fs %{
   void main () {
     vec4 o = vec4(1, 1, 1, 1);
 
-    #if USE_TEXTURE
+    #if USE_TEXTURE 
       CCTexture(texture, v_uv0, o);
     #endif
 
@@ -146,10 +140,6 @@ CCProgram fs %{
 
     gl_FragColor = o;
     
-    if(isShow == 0){
-        return;  
-    }
-
     #if SHOW_OUTLINE
    
     if (o.a >= 0.5)
