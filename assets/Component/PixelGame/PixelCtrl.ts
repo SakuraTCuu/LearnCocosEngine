@@ -114,6 +114,7 @@ export default class pixelCtrl extends cc.Component {
     */
     playAction() {
         let isLoop = this.mActionConfig.loop;
+        isLoop = true;
         let interval = this.mActionConfig.interval;
         this.mCallBack = () => {
             if (!isLoop && this.mIndex >= this.FrameSprites.length) {
