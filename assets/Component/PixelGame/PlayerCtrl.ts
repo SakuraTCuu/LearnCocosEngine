@@ -1,4 +1,5 @@
 import ButtonItemCtrl from "./ButtonItemCtrl";
+import FrameCtrl from "./FrameCtrl";
 
 const { ccclass, property } = cc._decorator;
 
@@ -9,7 +10,7 @@ interface ActionType {
 const ACT = {
     attack: {
         interval: 0.071,
-        loop: false,
+        loop: true,
     },
     dash: {
         interval: 0.071,
@@ -21,7 +22,7 @@ const ACT = {
     },
     idle: {
         interval: 0.071,
-        loop: false,
+        loop: true,
     },
     parry: {
         interval: 0.071,
@@ -37,21 +38,12 @@ const ACT = {
     },
     run: {
         interval: 0.071,
-        loop: false,
+        loop: true,
     }
 }
 
 @ccclass
-export default class pixelCtrl extends cc.Component {
-
-    @property(cc.Sprite)
-    TestSprite: cc.Sprite = null;
-
-    @property({
-        type: cc.Sprite,
-        displayName: "图片挂载点"
-    })
-    MountSprite: cc.Sprite = null;
+export default class PixelCtrl extends cc.Component {
 
     @property(cc.Prefab)
     ButtonPrefab: cc.Prefab = null;
@@ -59,18 +51,17 @@ export default class pixelCtrl extends cc.Component {
     @property(cc.Node)
     ContentNode: cc.Node = null;
 
-    private mIsPlaying: boolean = false;
-    private mCallBack: Function = null;
-    private FrameSprites: cc.SpriteFrame[] = [];
+    @property(FrameCtrl)
+    FrameCtrl: FrameCtrl = null;
+
     private mActionConfig: ActionType = null;
-    private mIndex: number = -1;
+    private mFrameSprites: cc.SpriteFrame[] = [];
 
     onLoad() {
 
         this.loadAsset(Object.keys(ACT)[0]);
         this.mActionConfig = Object.values(ACT)[0];
 
-        this.playAction();
         this.initEvent();
         this.initView();
     }
@@ -81,7 +72,6 @@ export default class pixelCtrl extends cc.Component {
 
     /**切换动作 */
     onClickAct(event: cc.Event.EventCustom) {
-        this.mIndex = -1;
         let actName = event.detail;
         console.log(actName);
         this.mActionConfig = ACT[actName];
@@ -105,36 +95,12 @@ export default class pixelCtrl extends cc.Component {
 
     loadAsset(act: string) {
         cc.resources.loadDir(`pixel/${act}`, cc.SpriteFrame, (err, res: cc.SpriteFrame[]) => {
-            this.FrameSprites = res;
+            this.mFrameSprites = res;
+            this.playAction();
         })
     }
 
-    /**
-    * @title 播放动画（循环切换图片）
-    */
     playAction() {
-        let isLoop = this.mActionConfig.loop;
-        isLoop = true;
-        let interval = this.mActionConfig.interval;
-        this.mCallBack = () => {
-            if (!isLoop && this.mIndex >= this.FrameSprites.length) {
-                return;
-            }
-            this.mIndex++;
-            this.MountSprite.spriteFrame = this.FrameSprites[this.mIndex % this.FrameSprites.length];
-        };
-        this.mIsPlaying = true;
-
-        this.schedule(this.mCallBack, interval);
-
-    }
-
-    /**
-     * @title 停止动画
-     */
-    stopAction() {
-        this.mIsPlaying = false;
-        this.unschedule(this.mCallBack);
-        this.MountSprite.spriteFrame = this.FrameSprites[this.FrameSprites.length - 1];
+        this.FrameCtrl.playAction(this.mFrameSprites, this.mActionConfig.interval, this.mActionConfig.loop);
     }
 }
