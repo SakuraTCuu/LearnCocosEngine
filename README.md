@@ -4,8 +4,6 @@ cocos creator 引擎源码研习, shader特效学习, 工具Demo
 ## 工具项目类
 
 ### PixelGame
-像素小游戏<br>
-![](https://github.com/SakuraTCuu/LearnCocosEngine/raw/master/README_GIF/PixelGame.gif)  
 ### Ray 
 2d射线,瞄准辅助线<br>
 ![](https://github.com/SakuraTCuu/LearnCocosEngine/raw/master/README_GIF/Ray.gif)  
